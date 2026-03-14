@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styling.css') }}">
+    </head>
+    <title>
+        Unit Converter
+    </title>
+
+    <body>
+        <h1>Unit converting web app</h1>
+
+        <div class="initial_input">
+            <label for="selectLabel"><h3>Select your measurement to continue</h3></label>
+            <select id="option">
+                <option value="">-- Select --</option>
+                <option value="length">Length</option>
+                <option value="weight">Weight</option>
+                <option value="temperature">Temperature</option>
+            </select>
+        </div>
+
+        <!-- div 1 with the menu for length conversion -->
+        <div id="length_convesion" style="display:none;">
+            <label for="lengthLabel">Length measurement to convert from:</label>
+            <select name="lengths" id="lengths">
+                <option value="centimeters">Centimeters</option>                
+                <option value="meters">Meters</option>
+                <option value="inches">Inches</option>
+                <option value="feet">Feet</option>
+            </select>
+        </div>
+
+        <!-- div 2 with the menu for weight conversion -->
+        <div id="weight_convesion" style="display:none;">
+            <label for="weightLabel">Weight measurement to convert from:</label>
+            <select name="weights" id="weights">
+                <option value="pounds">Pounds</option>                
+                <option value="ounces">Ounces</option>
+                <option value="grams">Grams</option>
+                <option value="kilograms">Kilograms</option>
+            </select>
+        </div>
+        
+
+
+
+        <script>
+            const select = document.getElementById("option");
+
+            select.addEventListener("change", function() {
+                document.getElementById("length_convesion").style.display = "none";
+                document.getElementById("weight_convesion").style.display = "none";
+
+                if (this.value === "length") {
+                    document.getElementById("length_convesion").style.display = "block";
+                }
+
+                if (this.value === "weight") {
+                    document.getElementById("weight_convesion").style.display = "block";
+                }
+            });
+        </script>
+    </body>
+</html>
