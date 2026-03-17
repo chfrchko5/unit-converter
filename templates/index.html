@@ -24,25 +24,31 @@
         <br>
 
         <!-- div 1 with the menu for length conversion -->
-        <div id="length_convesion" style="display:none;">
+        <div id="length_conversion" style="display:none;">
             <form action="/convert-length" method="post">
                 <p>
                     <label for="lengthFrom">Length measurement to convert from:</label>
                     <select name="lengthFrom" id="lengthFrom">
-                        <option value="centimeters">Centimeters</option>
-                        <option value="meters">Meters</option>
-                        <option value="inches">Inches</option>
-                        <option value="feet">Feet</option>
+                        <option value="millimeter">Millimeters</option>                
+                        <option value="centimeter">Centimeters</option>
+                        <option value="meter">Meters</option>
+                        <option value="inch">Inches</option>
+                        <option value="foot">Feet</option>
+                        <option value="yard">Yards</option>
+                        <option value="mile">Miles</option>
                     </select>
                 </p>
                 
                 <p>
                     <label for="lengthTo">Length measurement to convert to:</label>
                     <select name="lengthTo" id="lengthTo">
-                        <option value="centimeters">Centimeters</option>                
-                        <option value="meters">Meters</option>
-                        <option value="inches">Inches</option>
-                        <option value="feet">Feet</option>
+                        <option value="millimeter">Millimeters</option>                
+                        <option value="centimeter">Centimeters</option>
+                        <option value="meter">Meters</option>
+                        <option value="inch">Inches</option>
+                        <option value="foot">Feet</option>
+                        <option value="yard">Yards</option>
+                        <option value="mile">Miles</option>
                     </select>
                 </p>
 
@@ -60,24 +66,65 @@
         
 
         <!-- div 2 with the menu for weight conversion -->
-        <div id="weight_convesion" style="display:none;">
-            <label for="weightLabel">Weight measurement to convert from:</label>
-            <select name="weights" id="weights">
-                <option value="pounds">Pounds</option>                
-                <option value="ounces">Ounces</option>
-                <option value="grams">Grams</option>
-                <option value="kilograms">Kilograms</option>
-            </select>
+        <div id="weight_conversion" style="display:none;">
+            <form action="/convert-weight" method="post">
+                <p>
+                    <label for="weightFrom">Weight measurement to convert from:</label>
+                    <select name="weightFrom" id="weightFrom">
+                        <option value="milligram">Milligrams</option>                
+                        <option value="gram">Grams</option>
+                        <option value="kilogram">Kilograms</option>
+                        <option value="ounce">Ounces</option>
+                        <option value="pound">Pounds</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="weightTo">Weight measurement to convert from:</label>
+                    <select name="weightTo" id="weightTo">
+                        <option value="milligram">Milligrams</option>                
+                        <option value="gram">Grams</option>
+                        <option value="kilogram">Kilograms</option>
+                        <option value="ounce">Ounces</option>
+                        <option value="pound">Pounds</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="weightInput">Enter the measurement:</label>
+                    <input type="number" id="weightInput" name="weightInput">
+                </p>
+
+                <p class="button">
+                    <button type="submit">Convert</button> <!-- i think this is where the javascript ting comes in for in real time display shit -->
+                </p>
+            </form>
         </div>
         
-        <!-- div 3 with the menu for weight conversion -->
-        <div id="temperature_convesion" style="display:none;">
-            <label for="tempLabel">Weight measurement to convert from:</label>
-            <select name="temperature" id="temperature">
-                <option value="celcius">Celcius</option>                
-                <option value="fahrenheit">Fahrenheit</option>
-                <option value="kelvin">Kelvin</option>
-            </select>
+        <!-- div 3 with the menu for temp conversion -->
+        <div id="temperature_conversion" style="display:none;">
+            <form action="/convert-temperature" method="post">
+                <p>
+                    <label for="tempFrom">Weight measurement to convert from:</label>
+                    <select name="tempFrom" id="tempFrom">
+                        <option value="celcius">Celcius</option>                
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+
+                </p>
+                    <label for="tempTo">Weight measurement to convert from:</label>
+                    <select name="tempTo" id="tempTo">
+                        <option value="celcius">Celcius</option>                
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+
+                <p>
+                    <label for="tempInput">Enter the measurement:</label>
+                    <input type="number" id="tempInput" name="tempInput">
+                </p>
+            </form>
         </div>
 
         <script>
@@ -85,15 +132,20 @@
             const select = document.getElementById("option");
 
             select.addEventListener("change", function() {
-                document.getElementById("length_convesion").style.display = "none";
-                document.getElementById("weight_convesion").style.display = "none";
+                document.getElementById("length_conversion").style.display = "none";
+                document.getElementById("weight_conversion").style.display = "none";
+                document.getElementById("temperature_conversion").style.display = "none";
 
                 if (this.value === "length") {
-                    document.getElementById("length_convesion").style.display = "block";
+                    document.getElementById("length_conversion").style.display = "block";
                 }
 
                 if (this.value === "weight") {
-                    document.getElementById("weight_convesion").style.display = "block";
+                    document.getElementById("weight_conversion").style.display = "block";
+                }
+
+                if (this.value === "temperature") {
+                    document.getElementById("temperature_conversion").style.display = "block";
                 }
             });
         </script>
