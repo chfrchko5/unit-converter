@@ -30,3 +30,11 @@ input:focus {
   /* To give a little highlight on active elements */
   outline-color: black;
 }
+
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:valid {
+  border: 2px solid black;
+}
