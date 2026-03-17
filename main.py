@@ -142,79 +142,79 @@ def convert_length():
     else:
         return "yeah bruv"
 
-    return f'Converted length value is {str(converted)}'
+    return f'{str(converted)}'
 
 
 @app.route("/convert-weight", methods=["POST"])
 def convert_weight():
     weightFrom = request.form["weightFrom"]
     weightTo = request.form["weightTo"]
-    tempInput = int(request.form["tempInput"])
+    weightInput = int(request.form["weightInput"])
 
     if weightFrom == 'milligram':
         if weightTo == 'gram':
-            converted = (tempInput / 1000)
+            converted = (weightInput / 1000)
         elif weightTo == 'kilogram':
-            converted = (tempInput / 1,000,000)
+            converted = (weightInput / 1,000,000)
         elif weightTo == 'ounce':
-            converted = (tempInput / 28,349.5)
+            converted = (weightInput / 28,349.5)
         elif weightTo == 'pound':
-            converted = (tempInput / 453,592)
+            converted = (weightInput / 453,592)
         else:
-            return str(tempInput)
+            return str(weightInput)
         
     elif weightFrom == 'gram':
         if weightTo == 'milligram':
-            converted = (tempInput * 1000)
+            converted = (weightInput * 1000)
         elif weightTo == 'kilogram':
-            converted = (tempInput / 1,000)
+            converted = (weightInput / 1,000)
         elif weightTo == 'ounce':
-            converted = (tempInput / 28.3495)
+            converted = (weightInput / 28.3495)
         elif weightTo == 'pound':
-            converted = (tempInput / 453.592)
+            converted = (weightInput / 453.592)
         else:
-            return str(tempInput)
+            return str(weightInput)
         
     elif weightFrom == 'kilogram':
         if weightTo == 'milligram':
-            converted = (tempInput * 1,000,000)
+            converted = (weightInput * 1,000,000)
         elif weightTo == 'gram':
-            converted = (tempInput * 1,000)
+            converted = (weightInput * 1,000)
         elif weightTo == 'ounce':
-            converted = (tempInput * 35.274)
+            converted = (weightInput * 35.274)
         elif weightTo == 'pound':
-            converted = (tempInput * 2.20462)
+            converted = (weightInput * 2.20462)
         else:
-            return str(tempInput)
+            return str(weightInput)
 
     elif weightFrom == 'ounce':
         if weightTo == 'milligram':
-            converted = (tempInput * 28,349.5)
+            converted = (weightInput * 28,349.5)
         elif weightTo == 'gram':
-            converted = (tempInput * 28.3495)
+            converted = (weightInput * 28.3495)
         elif weightTo == 'kilogram':
-            converted = (tempInput / 35.274)
+            converted = (weightInput / 35.274)
         elif weightTo == 'pound':
-            converted = (tempInput / 16)
+            converted = (weightInput / 16)
         else:
-            return str(tempInput)
+            return str(weightInput)
         
     elif weightFrom == 'pound':
         if weightTo == 'milligram':
-            converted = (tempInput * 453,592)
+            converted = (weightInput * 453,592)
         elif weightTo == 'gram':
-            converted = (tempInput * 453.592)
+            converted = (weightInput * 453.592)
         elif weightTo == 'kilogram':
-            converted = (tempInput / 2.20462)
+            converted = (weightInput / 2.20462)
         elif weightTo == 'ounce':
-            converted = (tempInput * 16)
+            converted = (weightInput * 16)
         else:
-            return str(tempInput)
+            return str(weightInput)
         
     else:
         return "yeah bruv"
 
-    return f'Converted weight value is {str(converted)}'
+    return f'{str(converted)}'
 
 @app.route("/convert-temperature", methods=["POST"])
 def convert_temperature():
@@ -248,7 +248,7 @@ def convert_temperature():
     else:
         return "yeah bruv"
     
-    return f'Converted temperature value is {str(converted)}'
+    return f'{str(converted)}'
 
 if __name__ == "__main__":
     app.run(debug=True)

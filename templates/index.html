@@ -25,7 +25,7 @@
 
         <!-- div 1 with the menu for length conversion -->
         <div id="length_conversion" style="display:none;">
-            <form action="/convert-length" method="post">
+            <form id="lengthConverted">
                 <p>
                     <label for="lengthFrom">Length measurement to convert from:</label>
                     <select name="lengthFrom" id="lengthFrom">
@@ -62,10 +62,12 @@
                 </p>
             </form>
         </div>
+        
+        <div id='length_response' style="display:none;"></div>
 
         <!-- div 2 with the menu for weight conversion -->
         <div id="weight_conversion" style="display:none;">
-            <form action="/convert-weight" method="post">
+            <form id="weightConverted">
                 <p>
                     <label for="weightFrom">Weight measurement to convert from:</label>
                     <select name="weightFrom" id="weightFrom">
@@ -98,10 +100,12 @@
                 </p>
             </form>
         </div>
+
+        <div id='weight_response' style="display:none;"></div>
         
         <!-- div 3 with the menu for temp conversion -->
         <div id="temperature_conversion" style="display:none;">
-            <form action="/convert-temperature" method="post">
+            <form id="tempConverted">
                 <p>
                     <label for="tempFrom">Weight measurement to convert from:</label>
                     <select name="tempFrom" id="tempFrom">
@@ -122,8 +126,14 @@
                     <label for="tempInput">Enter the measurement:</label>
                     <input type="number" id="tempInput" name="tempInput" required>
                 </p>
+
+                <p class="button">
+                    <button type="submit">Convert</button> <!-- i think this is where the javascript ting comes in for in real time display shit -->
+                </p>
             </form>
         </div>
+
+        <div id='temp_response' style="display:none;"></div>
 
         <script>
             // script that displays the menu for the option selected by user
@@ -146,6 +156,53 @@
                     document.getElementById("temperature_conversion").style.display = "block";
                 }
             });
+
+            
+            // Helper function to handle form submissions
+                function handleConversion(formId, responseId, endpoint) {
+                const form = document.getElementById(formId);
+                const responseDiv = document.getElementById(responseId);
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault(); // stop page reload
+
+                    // Hide all other responses before showing new one
+                    document.querySelectorAll('.response').forEach(div => {
+                        div.style.display = 'none';
+                        div.innerHTML = '';
+                    });
+
+                    const formData = new FormData(this);
+
+                    // Optional: show loading state
+                    responseDiv.style.display = 'block';
+                    responseDiv.innerHTML = 'Calculating...';
+
+                    fetch(endpoint, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.text())
+                    .then(html => {
+                        responseDiv.innerHTML = html;  // show server response
+                        responseDiv.style.display = 'block';
+                    })
+                    .catch(err => {
+                        responseDiv.innerHTML = 'Error: ' + err;
+                        responseDiv.style.display = 'block';
+                    });
+                });
+            }
+
+                // Add a common class to responses so we can hide them all at once
+                document.getElementById('length_response').classList.add('response');
+                document.getElementById('weight_response').classList.add('response');
+                document.getElementById('temp_response').classList.add('response');
+
+                // Attach handlers
+                handleConversion('lengthConverted', 'length_response', '/convert-length');
+                handleConversion('weightConverted', 'weight_response', '/convert-weight');
+                handleConversion('tempConverted', 'temp_response', '/convert-temperature');
         </script>
     </body>
 </html>
